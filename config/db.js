@@ -13,8 +13,7 @@ export const getDB = async () => {
 
     return db;
   } catch (error) {
-    console.error("DB connection error:", error.message);
-    return null; // ❗ prevents server crash
+     throw new Error("Database connection failed");
   }
 };
 
