@@ -3,8 +3,6 @@ import mysql from "mysql2/promise";
 let db;
 
 export const getDB = async () => {
-  if (db) return db;
-
   try {
     db = await mysql.createConnection({
       host: process.env.DB_HOST,
