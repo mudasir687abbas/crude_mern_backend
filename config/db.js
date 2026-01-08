@@ -1,10 +1,23 @@
-import  mysql from "mysql2/promise";
+import mysql from "mysql2/promise";
 
-const db = await mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "web_portal"
-});
- export default db;
+let db;
 
+export const getDB = async () => {
+  if (db) return db;
+
+  try {
+    db = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+
+    return db;
+  } catch (error) {
+    console.error("DB connection error:", error.message);
+    return null; // ❗ prevents server crash
+  }
+};
+
+export default getDB;
