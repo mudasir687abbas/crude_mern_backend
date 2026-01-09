@@ -7,7 +7,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json()); 
-app.get("/",(re1,res)=>{res.send("Server is running")});
+app.get("/",(req,res)=>{res.send("Server is running")});
 app.use("/api/users", crudRoute);
 app.use(errorHandler);
 export default app;
