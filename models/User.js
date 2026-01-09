@@ -1,18 +1,15 @@
-import { getDB } from "../config/db.js";
+import db from "../config/db.js";
 
 const User = {
   getUsers: async () => {
-    const db = await getDB();
-    if (!db) return [];
+    if(!db) throw new Error("No Database Available");
 
     const [rows] = await db.query("SELECT * FROM user");
     return rows;
   },
 
   getUserById: async (id) => {
-    const db = await getDB();
-    if (!db) return null;
-
+    if(!db) throw new Error("No Database Available");
     const [rows] = await db.query(
       "SELECT * FROM user WHERE id = ?",
       [id]
@@ -21,9 +18,7 @@ const User = {
   },
 
   createUser: async (name, role) => {
-    const db = await getDB();
-    if (!db) return null;
-
+    if(!db) throw new Error("No Database Available");
     const [result] = await db.query(
       "INSERT INTO user (name, role) VALUES (?, ?)",
       [name, role]
@@ -32,9 +27,7 @@ const User = {
   },
 
   updateUser: async (id, name, role) => {
-    const db = await getDB();
-    if (!db) return false;
-
+    if(!db) throw new Error("No Database Available");
     await db.query(
       "UPDATE user SET name = ?, role = ? WHERE id = ?",
       [name, role, id]
@@ -43,8 +36,7 @@ const User = {
   },
 
   deleteUser: async (id) => {
-    const db = await getDB();
-    if (!db) return false;
+    if(!db) throw new Error("No Database Available");
 
     await db.query("DELETE FROM user WHERE id = ?", [id]);
     return true;
