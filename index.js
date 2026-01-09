@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use("/api/users", crudRoute);
 app.use(errorHandler);
-
+export default app;
 
 // app.listen(5000, () => {
 //   console.log("Server running on port 5000");
