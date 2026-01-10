@@ -5,7 +5,7 @@ import errorHandler from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-app.use(cors([origin:"https://crude-mern-frontend.vercel.app/"));
+app.use(cors([origin:"https://crude-mern-frontend.vercel.app/api/users"));
 app.use(express.json()); 
 app.use("/api/users", crudRoute);
 app.use(errorHandler);
